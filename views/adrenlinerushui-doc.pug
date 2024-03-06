@@ -1,0 +1,168 @@
+extends navbar.pug
+block append content
+      br
+      .container
+        .row.align-items-start
+           h1.text-light Adrenlinerush UI
+           br
+        .row.align-items-start
+          .col
+            .card(style="width: 300px;")
+              .card-header Installation - Gentoo
+              .card-body
+                h6.card-subtitle.mb-2.text-body-secondary emerge --ask adrenlinerushui
+                a.btn.btn-primary(href="https://wiki.adrenlinerush.net/doku.php?id=gentoo_portage_overlay") Setup Overlay
+          .col
+            .card(style="width: 300px;")
+              .card-header Installation - Bookworm
+              .card-body
+                h6.card-subtitle.mb-2.text-body-secondary apt-get install adrenlinerushui
+                a.btn.btn-primary(href="https://wiki.adrenlinerush.net/doku.php?id=bookworm_-_custom_packages") Setup Apt
+          .col
+        .row.align-items-start
+          .col
+            br
+            .card(style="width: 300px;")
+              .card-header Configuration - EGLFS (DRI\KMS)
+              .card-body
+                h6.card-subtitle.mb-2.text-body-secondary export QT_QPA_PLATFORM="eglfs"
+            br
+          .col
+            br
+            .card(style="width: 300px;")
+              .card-header Configuration - Framebuffer
+              .card-body
+                h6.card-subtitle.mb-2.text-body-secondary export QT_QPA_PLATFORM="linuxfb"
+            br
+          .col
+            br
+        .row.align-items-start
+          h3.text-light Usage:
+        .row.align-items-start
+          .col
+            .card(style="width: 300px;")
+              .card-body
+                h6.card-subtitle.mb-2.text-body-secondary # adrenlinerushui
+        .row.align-items-start
+          .col
+            br
+            -
+              var gshortcuts = {
+                "Ctrl+q":  "Exit the Application",
+                "Alt+t": "Tile Windows",
+                "Alt+r": "Restore Window",
+                "Alt+Tab": "Switch to Next Window",
+                "Alt+s": "Open the Start Menu",
+                "Ctrl+s": "Activate Other Screen",
+              }
+            h3.text-light Global Shortcuts
+            br
+            table.table.table-borderless(style='width: 300px;')
+              each text, shortcut in gshortcuts
+                tr
+                  td
+                    span.badge.text-bg-secondary= shortcut
+                  td= text
+            br
+            h3.text-light Printing
+            br
+            .card(style="width: 300px;")
+              .card-body
+                h6.card-subtitle.mb-2.text-body-secondary Printing is not directly supported.  You can print using cups and the cli using the "lp" command.  It supports pdf, images, and text.
+            br
+            h3.text-light Media Player
+            br
+            table.table.table-borderless(style='width: 300px;')
+              tr
+                td
+                  span.badge.text-bg-secondary= "Ctrl+o"
+                td= "Open A File"
+          .col
+            br
+            h3.text-light File Browser
+            .card(style="width: 300px;")
+              .card-body
+                h5.card-title Double Click
+                h6.card-subtitle.mb-2.text-body-secondary Navigates to directory.
+                h6.card-subtitle.mb-2.text-body-secondary Or
+                h6.card-subtitle.mb-2.text-body-secondary Attempts to open.  Asks if you want to open with Vim, if file-type uknown.
+            br
+            .card(style="width: 300px;")
+              .card-body
+                h5.card-title Directories
+                h6.card-subtitle.mb-2.text-body-secondary Shown in blue.
+            -
+              var contextmenu = {
+                "Vim": "Opens selected file with vim.",
+                "Webengine": "Opens selected file with a web browser.",
+                "Markdown": "Opens selected file with markdown viewer.",
+                "MediaPlayer": "Opens selected file with media player.",
+                "Delete": "Deletes file or directory, prompts for conirmation,",
+                "Create Directory": "Creates a directory, prompts for name.",
+                "Touch File": "Creates an empty file, prompts for name.",
+                "Bash": "",
+                "(Execute)": "Executes the file.",
+                "(New Shell Here)": "Opens A Terminal at current directory.",
+              }
+            br
+            .card(style="width: 300px;")
+              .card-body
+                h5.card-title File List Context Menu
+                h6.card-subtitle.mb-2.text-body-secondary
+                  table.table.table-borderless(style='width: 250px;')
+                    each text, menuitem in contextmenu
+                      tr
+                        td
+                          span.badge.text-bg-secondary= menuitem
+                        td= text
+            br
+
+          .col
+            br
+            -
+              var bshortcuts = {
+                "Ctrl+p": "Prints/Saves current tab as PDF",
+                "Ctrl+g": "Wipes the text from the URL bar and focus for entry",
+                "Ctrl+t": "Opens New Tab",
+                "Ctrl+f": "Opens Search Dialog",
+              }
+            h3.text-light Web Browser
+            br
+            table.table.table-borderless(style='width: 300px;')
+              each text, shortcut in bshortcuts
+                tr
+                  td
+                    span.badge.text-bg-secondary= shortcut
+                  td= text
+            br
+            -
+              var sshortcuts = {
+                "n": "Next",
+                "p": "Previous",
+                "ESC": "Exit Search",
+              }
+            .card(style="width: 300px;")
+              .card-body
+                h5.card-title Double Click on Tab
+                h6.card-subtitle.mb-2.text-body-secondary Opens New Tab
+            br
+            .card(style="width: 300px;")
+              .card-body
+                h5.card-title Searching
+                h6.card-subtitle.mb-2.text-body-secondary
+                  table.table.table-borderless(style='width: 250px;')
+                    each text, shortcut in sshortcuts
+                      tr
+                        td
+                          span.badge.text-bg-secondary= shortcut
+                        td= text
+            br
+            .card(style="width: 300px;")
+              .card-body
+                h5.card-title Browser Favorites
+                h6.card-subtitle.mb-2.text-body-secondary Stored in text file: ~/.Favorites
+                h6.card-text Format: %TITLE%=%URL%
+            br
+
+
+

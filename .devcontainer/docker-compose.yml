@@ -1,0 +1,12 @@
+services:
+  devcontainer:
+    build: .
+    command: sleep infinity
+    ports:
+      - 3000:3000
+    volumes:
+      - ..:/workspace:cached
+      - node_modules:/workspacke/node_modules:rw
+
+volumes:
+  node_modules:

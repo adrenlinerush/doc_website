@@ -1,0 +1,47 @@
+doctype html
+html(lang="en")
+  head
+    meta(charset="utf-8")
+    meta(http-equiv="X-UA-Compatible", content="IE=edge")
+    meta(name="viewport", content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0")
+    title Adrenlinerush.net
+    link(rel='stylesheet', href='./css/bootstrap.css')
+  body.bg-dark
+    nav.navbar.navbar-expand-lg.navbar-light.bg-light
+      a.navbar-brand(href='/')
+        img(src='./adrenaline.png', width='60', height='60', alt='')
+      ul.navbar-nav.mr-auto
+        li.nav-item.light
+          a.nav-link(href='/') Adrenlinerush
+        li.nav-item.dropdown
+          a.nav-link.dropdown-toggle(href='#', role='button', data-bs-toggle='dropdown', aria-expanded='false') Documentation
+          ul.dropdown-menu
+            li
+              a.dropdown-item(href='/adrenlinerushui-doc') AdrenlinerushUI
+            li
+              a.dropdown-item(href='/filebrowser-doc') Adrenlinerush Filebrowser
+            li
+              a.dropdown-item(href='/qeglfsvideoplayer-doc') Adrenlinerush qeglfsvideoplayer
+
+        li.nav-item.dropdown
+          a.nav-link.dropdown-toggle(href='#', role='button', data-bs-toggle='dropdown', aria-expanded='false') Packages
+          ul.dropdown-menu
+            li
+              a.dropdown-item(href='https://wiki.adrenlinerush.net/doku.php?id=gentoo_aarch64_binary_repository') Gentoo - arm64 Binary Repository
+            li
+              a.dropdown-item(href='https://wiki.adrenlinerush.net/doku.php?id=gentoo_portage_overlay') Gentoo - Portage overlay
+            li
+              a.dropdown-item(href='https://wiki.adrenlinerush.net/doku.php?id=bookworm_-_custom_packages') Bookworm - Apt-Repository
+
+        li.nav-item.dropdown
+          a.nav-link.dropdown-toggle(href='#', role='button', data-bs-toggle='dropdown', aria-expanded='false') About
+          ul.dropdown-menu
+            li
+              a.dropdown-item(href='https://wiki.adrenlinerush.net/doku.php?id=about:aboutme') About Me
+            li
+              a.dropdown-item(href='https://wiki.adrenlinerush.net/doku.php?id=about:resume') Resume'
+    block content
+
+  script(src="./jquery/jquery.js")
+  script(src="./js/bootstrap.bundle.js")
+

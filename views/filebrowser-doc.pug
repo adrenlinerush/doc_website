@@ -1,0 +1,75 @@
+extends navbar.pug
+block append content
+      br
+      .container
+        .row.align-items-start
+           h1.text-light Adrenlinerush Filebrowser
+           br
+        .row.align-items-start
+          .col
+            .card(style="width: 300px;")
+              .card-header Installation - Gentoo
+              .card-body
+                h6.card-subtitle.mb-2.text-body-secondary emerge --ask filebrowser
+                a.btn.btn-primary(href="https://wiki.adrenlinerush.net/doku.php?id=gentoo_portage_overlay") Setup Overlay
+            br
+          .col
+            .card(style="width: 300px;")
+              .card-header Installation - Bookworm
+              .card-body
+                h6.card-subtitle.mb-2.text-body-secondary apt-get install filebrowser
+                a.btn.btn-primary(href="https://wiki.adrenlinerush.net/doku.php?id=bookworm_-_custom_packages") Setup Apt
+            br
+          .col
+            br
+        .row.align-items-start
+          h3.text-light Usage:
+        .row.align-items-start
+          .col
+            .card(style="width: 300px;")
+              .card-body
+                h6.card-subtitle.mb-2.text-body-secondary From within X or wayland.
+                h6.card-subtitle.mb-2.text-body-secondary # filebrowser
+        .row.align-items-start
+          .col
+            br
+            .card(style="width: 300px;")
+              .card-body
+                h5.card-title Double Click
+                h6.card-subtitle.mb-2.text-body-secondary Navigates to directory.
+                h6.card-subtitle.mb-2.text-body-secondary Or
+                h6.card-subtitle.mb-2.text-body-secondary Attempts to open.  Asks if you want to open with Vim, if file-type uknown.
+
+          .col
+            -
+              var contextmenu = {
+                "Vim": "Opens selected file with vim.",
+                "Webengine": "Opens selected file with a web browser.",
+                "Markdown": "Opens selected file with markdown viewer.",
+                "Media Player": "Opens selected file with media player.",
+                "Libre Office": "Opens with Libre Office.",
+                "Delete": "Deletes file or directory, prompts for conirmation,",
+                "Create Directory": "Creates a directory, prompts for name.",
+                "Touch File": "Creates an empty file, prompts for name.",
+                "Bash": "",
+                "(Execute)": "Executes the file.",
+                "(New Shell Here)": "Opens A Terminal at current directory.",
+              }
+            br
+            .card(style="width: 300px;")
+              .card-body
+                h5.card-title File List Context Menu
+                h6.card-subtitle.mb-2.text-body-secondary
+                  table.table.table-borderless(style='width: 250px;')
+                    each text, menuitem in contextmenu
+                      tr
+                        td
+                          span.badge.text-bg-secondary= menuitem
+                        td= text
+            br
+          .col
+            br
+            .card(style="width: 300px;")
+              .card-body
+                h5.card-title Directories
+                h6.card-subtitle.mb-2.text-body-secondary Shown in blue.

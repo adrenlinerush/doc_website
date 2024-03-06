@@ -1,0 +1,30 @@
+extends navbar.pug
+block append content
+    br
+    #carouselCaptions.carousel.slide.bg-dark
+      .carousel-indicators
+        button(type='button', data-bs-target='#carouselCaptions', data-bs-slide-to='0', class=['active'], aria-current='true', aria-label='Adrenlinerush UI')
+        button(type='button', data-bs-target='#carouselCaptions', data-bs-slide-to='1', aria-label='Adrenlinerush Filebrowser')
+        button(type='button', data-bs-target='#carouselCaptions', data-bs-slide-to='2', aria-label='qeglfsvideoplayer')
+      .carousel-inner
+        .carousel-item.active
+          img.d-block.mx-auto.w-50(src='./ui.png', alt='Adrenlinerush UI')
+          .carousel-caption.d-none.d-md-block
+            h5.text-light Adrenlinerush UI
+            p.text-light A graphical user interface without X or Wayland.
+        .carousel-item
+          img.d-block.mx-auto.w-50(src='./filebrowser.png', alt='Adrenlinerush Filebrowser')
+          .carousel-caption.d-none.d-md-block
+            h5.text-light Adrenlinerush Filebrowser
+            p.text-light Filebrowser from Adrenlinerush UI compiled separately for use in in X.
+        .carousel-item
+          img.d-block.mx-auto.w-50(src='./qeglfsvideoplayer.png', alt='qeglfsvideoplayer')
+          .carousel-caption.d-none.d-md-block
+            h5.text-light qeglfsvideoplayer
+            p.text-light A command line video player than can be used with or without X or Wayland.  It has mplayer like controls.
+      button.carousel-control-prev(type='button', data-bs-target='#carouselCaptions', data-bs-slide='prev')
+        span.carousel-control-prev-icon(aria-hidden='true')
+        span.visually-hidden Previous
+      button.carousel-control-next(type='button', data-bs-target='#carouselCaptions', data-bs-slide='next')
+        span.carousel-control-next-icon(aria-hidden='true')
+        span.visually-hidden Next

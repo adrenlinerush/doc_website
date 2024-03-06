@@ -1,0 +1,74 @@
+extends navbar.pug
+block append content
+      br
+      .container
+        .row.align-items-start
+           h1.text-light qeglfsvideoplayer
+           br
+        .row.align-items-start
+          .col
+            .card(style="width: 300px;")
+              .card-header Installation - Gentoo
+              .card-body
+                h6.card-subtitle.mb-2.text-body-secondary emerge --ask qeglfsvideoplayer
+                a.btn.btn-primary(href="https://wiki.adrenlinerush.net/doku.php?id=gentoo_portage_overlay") Setup Overlay
+          .col
+            .card(style="width: 300px;")
+              .card-header Installation - Bookworm
+              .card-body
+                h6.card-subtitle.mb-2.text-body-secondary apt-get install qeglfsvideoplayer
+                a.btn.btn-primary(href="https://wiki.adrenlinerush.net/doku.php?id=bookworm_-_custom_packages") Setup Apt
+          .col
+        .row.align-items-start
+          .col
+            br
+            .card(style="width: 300px;")
+              .card-header Configuration - EGLFS (DRI\KMS)
+              .card-body
+                h6.card-subtitle.mb-2.text-body-secondary export QT_QPA_PLATFORM="eglfs"
+            br
+          .col
+            br
+            .card(style="width: 300px;")
+              .card-header Configuration - Framebuffer
+              .card-body
+                h6.card-subtitle.mb-2.text-body-secondary export QT_QPA_PLATFORM="linuxfb"
+            br
+          .col
+            br
+            .card(style="width: 300px;")
+              .card-header Configuration - X or Wayland
+              .card-body
+                h6.card-subtitle.mb-2.text-body-secondary
+                h6.card-subtitle.mb-2.text-body-secondary None Required!
+            br
+        .row.align-items-start
+          h3.text-light Usage:
+        .row.align-items-start
+          .col
+            .card(style="width: 600px;")
+              .card-body
+                h6.card-subtitle.mb-2.text-body-secondary # qeglfsvideoplayer relative/path/to/video.mp4
+        .row.align-items-start
+          .col
+            br
+            -
+              var commands = {
+                "q": "Quit",
+                "p": "Toggle Play/Pause",
+                "↑": "Volume Up",
+                "↓": "Volume Down",
+                "→": "Skip Forward",
+                "←": "Skip Backwards",
+              }
+            .card(style="width: 300px;")
+              .card-body
+                h6.card-subtitle.mb-2.text-body-secondary
+                  table.table.table-borderless(style='width: 250px;')
+                    each text, command in commands
+                      tr
+                        td
+                          span.badge.text-bg-secondary= command
+                        td= text
+          .col
+          .col
