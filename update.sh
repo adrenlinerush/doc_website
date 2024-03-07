@@ -14,5 +14,5 @@ echo "Remove old container."
 docker rm adrenlinerush-doc
 
 echo "Start new container with new image."
-docker run --name adrenlinerush-doc -p 3000:3000 -d --restart always adrenlinerush-doc
+docker run --name adrenlinerush-doc -p 127.0.0.1:3000:3000 -d --restart always adrenlinerush-doc
 docker ps
