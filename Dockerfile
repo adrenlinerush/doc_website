@@ -2,8 +2,8 @@ FROM node:21-bookworm
 
 
 RUN mkdir /app
-RUN mkdir -p /app/public
-RUN mkdir -p /app/views
+RUN mkdir /app/public
+RUN mkdir /app/views
 WORKDIR /app
 COPY public ./public/
 COPY views ./views/
