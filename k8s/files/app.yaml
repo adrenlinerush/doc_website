@@ -1,0 +1,25 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: adrenlinerush-doc
+  name: adrenlinerush-doc
+  labels:
+    app: adrenlinerush-doc
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: adrenlinerush-doc
+  template:
+    metadata:
+      labels:
+        app: adrenlinerush-doc
+    spec:
+      containers:
+      - name: adrenlinerush-doc
+        image: registry.rancher.adrenlinerush.site/adrenlinerush-doc:latest
+        ports:
+        - containerPort: 3000
+      imagePullSecrets:
+      - name: registry-creds

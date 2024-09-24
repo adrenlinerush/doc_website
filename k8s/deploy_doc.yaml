@@ -1,0 +1,95 @@
+- name: Deploy Docsite K8s
+  hosts: bastion
+  tasks:
+    - name: copy app defintion
+      copy:
+        src: files/app.yaml
+        dest: /root/doc-app.yaml
+        owner: root
+        group: root
+        mode: '0644'
+    - name: copy service defintion
+      copy:
+        src: files/service.yaml
+        dest: /root/doc-service.yaml
+        owner: root
+        group: root
+        mode: '0644'
+    - name: copy ingress defintion
+      copy:
+        src: files/ingress.yaml
+        dest: /root/doc-ingress.yaml
+        owner: root
+        group: root
+        mode: '0644'
+    - name: Create namespace
+      kubernetes.core.k8s:
+        name: adrenlinerush-doc
+        api_version: v1
+        kind: Namespace
+        state: present
+    - name: Create Docker registry secret
+      kubernetes.core.k8s:
+        state: present
+        definition:
+          apiVersion: v1
+          kind: Secret
+          metadata:
+            name: registry-creds
+            namespace: adrenlinerush-doc
+          type: kubernetes.io/dockerconfigjson
+          data:
+            .dockerconfigjson: "{{
+              {
+                'auths': {
+                  'registry.rancher.adrenlinerush.site': {
+                          'auth': lookup('env', 'REGISTRY_HTTP_BASIC') 
+                  }
+                }
+            } | to_json | b64encode }}"
+    - name: create app
+      kubernetes.core.k8s:
+        state: present
+        src: /root/doc-app.yaml
+    - name: create service
+      kubernetes.core.k8s:
+        state: present
+        src: /root/doc-service.yaml
+    - name: create ingress
+      kubernetes.core.k8s:
+        state: present
+        src: /root/doc-ingress.yaml
+    - name: Add nginx configuration
+      copy:
+        src: files/nginx-adrenlinerush-doc
+        dest: /etc/nginx/sites-available/
+        owner: root
+        group: root
+        mode: '0644'
+      notify: Restart NGINX
+    - name: Enable website configuration
+      file:
+        src: /etc/nginx/sites-available/nginx-adrenlinerush-doc
+        dest: /etc/nginx/sites-enabled/nginx-adrenlinerush-doc
+        state: link
+      notify: Restart NGINX
+    - name: 'Get certificate'
+      command: '/usr/bin/certbot certonly --manual --preferred-challenges=dns --manual-auth-hook /usr/local/bin/certbot-hetzner-auth.sh --manual-cleanup-hook /usr/local/bin/certbot-hetzner-cleanup.sh -d "doc.adrenlinerush.net"'
+      args:
+        creates: '/etc/letsencrypt/live/doc.adrenlinerush.net'
+      ignore_errors: true
+    - name: create dns record record
+      community.dns.hetzner_dns_record:
+        hetzner_token: "{{ lookup('env', 'TF_VAR_hcloud_dns_token') }}"
+        state: present
+        zone_name: "adrenlinerush.net"
+        prefix: "doc"
+        type: A
+        value: "{{ hostvars['k3s-bastion'].ansible_host }}"
+        ttl: 60
+
+  handlers:
+    - name: Restart NGINX
+      service:
+        name: nginx
+        state: restarted

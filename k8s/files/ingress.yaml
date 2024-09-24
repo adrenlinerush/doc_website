@@ -1,0 +1,14 @@
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: adrenlinerush-doc-ingress
+  namespace: adrenlinerush-doc
+spec:
+  entryPoints:
+    - web
+  routes:
+    - match: Host(`doc.rancher.adrenlinerush.site`) || Host(`doc.adrenlinerush.net`)
+      kind: Rule
+      services:
+        - name: adrenlinerush-doc-service
+          port: 80
