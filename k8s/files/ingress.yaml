@@ -7,7 +7,7 @@ spec:
   entryPoints:
     - web
   routes:
-    - match: Host(`doc.rancher.adrenlinerush.site`) || Host(`doc.adrenlinerush.net`)
+    - match: Host(`doc.rancher.adrenlinerush.site`) || Host(`doc.adrenlinerush.net`) || Host(`doc.adrenlinerush.com`) || Host(`doc.adrenlinerush.us`)
       kind: Rule
       services:
         - name: adrenlinerush-doc-service
